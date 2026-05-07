@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>MoveStudio | Фитнес и танцы</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Poppins + Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fef9f5;
+            color: #1e1a2f;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            border-bottom: 1px solid #ffe4dc;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            max-width: 1360px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #ff6b4a, #d93c7b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .logo i {
+            background: none;
+            -webkit-background-clip: unset;
+            color: #ff6b4a;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #2d2a3e;
+            transition: 0.2s;
+        }
+        .nav-links a:hover { color: #ff6b4a; }
+
+        .btn-sign {
+            background: #ff6b4a;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-sign:hover {
+            background: #e05a3c;
+            transform: translateY(-2px);
+        }
+
+        .burger {
+            display: none;
+            font-size: 1.7rem;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(105deg, #fff3ef 0%, #ffffff 100%);
+            padding: 60px 0 70px;
+        }
+        .hero-grid {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+        .hero-text {
+            flex: 1;
+        }
+        .hero-badge {
+            background: #ffe2d9;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 40px;
+            color: #ff5a38;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .hero-text h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #5a5570;
+            margin-bottom: 28px;
+        }
+        .btn {
+            display: inline-block;
+            background: #ff6b4a;
+            color: white;
+            padding: 14px 34px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid #ff6b4a;
+            color: #ff6b4a;
+            margin-left: 16px;
+        }
+        .btn:hover {
+            background: #e05a3c;
+            transform: translateY(-2px);
+        }
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 40px;
+            box-shadow: 0 25px 35px -12px rgba(0,0,0,0.15);
+        }
+
+        /* Features */
+        .section {
+            padding: 80px 0;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .section-title span {
+            color: #ff6b4a;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        .feature-card {
+            background: white;
+            padding: 32px 20px;
+            border-radius: 32px;
+            transition: 0.2s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            border: 1px solid #ffeae3;
+        }
+        .feature-card i {
+            font-size: 2.5rem;
+            color: #ff6b4a;
+            margin-bottom: 20px;
+        }
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        /* Directions (карточки направлений) */
+        .directions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+        .direction-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            transition: 0.25s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            border: 1px solid #ffe0d6;
+        }
+        .direction-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        .direction-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .direction-info {
+            padding: 24px;
+        }
+        .direction-info h3 {
+            font-size: 1.4rem;
+        }
+        .price-badge {
+            margin-top: 10px;
+            font-weight: 700;
+            color: #ff6b4a;
+        }
+
+        /* Schedule (расписание) */
+        .schedule-table {
+            background: white;
+            border-radius: 36px;
+            padding: 28px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            border: 1px solid #ffeae3;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 1px solid #ffe0d6;
+        }
+        th {
+            color: #ff6b4a;
+            font-weight: 700;
+        }
+
+        /* Trainers */
+        .trainers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 32px;
+        }
+        .trainer-card {
+            background: white;
+            border-radius: 28px;
+            text-align: center;
+            padding: 28px 16px;
+            transition: 0.2s;
+            border: 1px solid #ffeae3;
+        }
+        .trainer-card img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 18px;
+            border: 3px solid #ff6b4a;
+        }
+        .trainer-card h4 {
+            font-size: 1.3rem;
+        }
+
+        /* Pricing */
+        .pricing-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        .price-card {
+            background: white;
+            border-radius: 32px;
+            padding: 32px 24px;
+            flex: 1 1 260px;
+            text-align: center;
+            transition: 0.2s;
+            border: 1px solid #ffeae3;
+        }
+        .price-card.popular {
+            border: 2px solid #ff6b4a;
+            background: #fffaf7;
+            transform: scale(1.02);
+        }
+        .price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ff6b4a;
+            margin: 20px 0;
+        }
+
+        /* Form */
+        .form-callback {
+            background: linear-gradient(135deg, #1e1a2f, #2d2843);
+            border-radius: 48px;
+            padding: 56px 48px;
+            color: white;
+        }
+        .form-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+        .form-text {
+            flex: 1;
+        }
+        .form-fields {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .form-fields input, .form-fields select {
+            padding: 14px 20px;
+            border-radius: 60px;
+            border: none;
+            font-size: 1rem;
+        }
+        .form-fields button {
+            background: #ff6b4a;
+            border: none;
+            padding: 14px;
+            border-radius: 60px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+        }
+
+        footer {
+            background: #0f0c1b;
+            color: #c5c0da;
+            padding: 48px 0 24px;
+        }
+        .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        .social a {
+            color: #c5c0da;
+            margin-left: 20px;
+            font-size: 1.3rem;
+        }
+        .copyright {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 780px) {
+            .navbar {
+                padding: 14px 20px;
+            }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 70%;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                gap: 28px;
+                transition: 0.3s;
+                height: calc(100vh - 70px);
+                z-index: 999;
+                box-shadow: 4px 0 20px rgba(0,0,0,0.08);
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .burger {
+                display: block;
+            }
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            .form-callback {
+                padding: 32px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="navbar">
+        <div class="logo"><i class="fas fa-heartbeat"></i> MoveStudio</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Главная</a></li>
+            <li><a href="#directions">Направления</a></li>
+            <li><a href="#schedule">Расписание</a></li>
+            <li><a href="#trainers">Тренеры</a></li>
+            <li><a href="#pricing">Цены</a></li>
+            <li><a href="#contact">Контакты</a></li>
+        </ul>
+        <button class="btn-sign" id="openFormBtn"><i class="fas fa-calendar-check"></i> Записаться</button>
+        <div class="burger" id="burgerBtn"><i class="fas fa-bars"></i></div>
+    </div>
+</header>
+
+<main>
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <div class="hero-badge"><i class="fas fa-music"></i> Танцуй, двигайся, живи</div>
+                <h1>Фитнес и танцевальная студия</h1>
+                <p>С нуля до профессионала: zumba, contemporary, stretching, силовые тренировки. Уютная атмосфера и опытные тренеры.</p>
+                <a href="#contact" class="btn">Пробное занятие 0 ₽</a>
+                <a href="#pricing" class="btn btn-outline">Выбрать абонемент</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Танцевальная студия">
+            </div>
+        </div>
+    </section>
+
+    <!-- Почему мы -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card"><i class="fas fa-chalkboard-user"></i><h3>Топ-тренеры</h3><p>Сертифицированные профессионалы</p></div>
+                <div class="feature-card"><i class="fas fa-clock"></i><h3>Удобное расписание</h3><p>Утро, день, вечер — выберите своё</p></div>
+                <div class="feature-card"><i class="fas fa-heart"></i><h3>Дружеская атмосфера</h3><p>Сообщество единомышленников</p></div>
+                <div class="feature-card"><i class="fas fa-star"></i><h3>Первое занятие бесплатно</h3><p>Познакомьтесь с нами без оплаты</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Направления -->
+    <section id="directions" class="section">
+        <div class="container">
+            <h2 class="section-title">Танцевальные <span>направления</span></h2>
+            <div class="directions-grid">
+                <div class="direction-card">
+                    <div class="direction-img"><img src="https://as2.ftcdn.net/v2/jpg/00/99/82/15/1000_F_99821575_nVEHTBXzUnTcLIKN6yOymAWAnFwEybGb.jpg" alt="Zumba"></div>
+                    <div class="direction-info"><h3>Zumba Fitness</h3><p>Латинские ритмы, жиросжигание и море энергии.</p><div class="price-badge">от 650 ₽ / занятие</div></div>
+                </div>
+                <div class="direction-card">
+                    <div class="direction-img"><img src="https://lh3.googleusercontent.com/udJ526wzIiiy05n1Zfgj6wTG-ZNvmspsP1qSYfDXyQeWfnXJrkX5KFefMT9Tql9IAKMMxbT02paPSRC-wYw8NZvDwqNcKrYMV4P7iRkoNjJDICDmMfClKAjKIMKDOzDtDVZwNwsF" alt="Contemporary"></div>
+                    <div class="direction-info"><h3>Contemporary</h3><p>Пластика, эмоции, современная хореография.</p><div class="price-badge">от 750 ₽ / занятие</div></div>
+                </div>
+                <div class="direction-card">
+                    <div class="direction-img"><img src="https://complete-pilates.co.uk/wp-content/uploads/2020/09/Piates-childs-pose-stretch-min.jpg" alt="Stretching"></div>
+                    <div class="direction-info"><h3>Stretching & Pilates</h3><p>Гибкость, осанка, релаксация.</p><div class="price-badge">от 550 ₽ / занятие</div></div>
+                </div>
+                <div class="direction-card">
+                    <div class="direction-img"><img src="https://media.istockphoto.com/id/111949619/photo/african-american-woman-with-hip-hop-vibe-legs-high-heels.jpg?s=1024x1024&w=is&k=20&c=kLvBnq3m2EJi4lu4UDxt6vqg9iBw8my2l5dtVtQ-O3M=" alt="Hip-Hop"></div>
+                    <div class="direction-info"><h3>Hip-Hop / High Heels</h3><p>Уличные стили и уверенность в себе.</p><div class="price-badge">от 700 ₽ / занятие</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Расписание -->
+    <section id="schedule" class="section" style="background: #fff9f6;">
+        <div class="container">
+            <h2 class="section-title">Расписание <span>занятий</span></h2>
+            <div class="schedule-table">
+                <table>
+                    <thead><tr><th>Время</th><th>Понедельник</th><th>Среда</th><th>Пятница</th><th>Суббота</th></tr></thead>
+                    <tbody>
+                        <tr><td>10:00 - 11:00</td><td>Stretching</td><td>Pilates</td><td>Zumba</td><td>Contemporary</td></tr>
+                        <tr><td>12:00 - 13:00</td><td>Hip-Hop</td><td>—</td><td>High Heels</td><td>Stretching</td></tr>
+                        <tr><td>18:30 - 19:30</td><td>Zumba</td><td>Contemporary</td><td>Pilates</td><td>Hip-Hop</td></tr>
+                        <tr><td>19:45 - 20:45</td><td>High Heels</td><td>Stretching</td><td>Zumba</td><td>—</td></tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 20px; font-size: 0.85rem; text-align: center;">*Вторник и четверг — индивидуальные занятия по записи. Актуальное расписание уточняйте в студии.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Тренеры -->
+    <section id="trainers" class="section">
+        <div class="container">
+            <h2 class="section-title">Наши <span>тренеры</span></h2>
+            <div class="trainers-grid">
+                <div class="trainer-card"><img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Анна"><h4>Анна К.</h4><p>Zumba, High Heels</p><small>Опыт 8 лет, чемпионка РФ</small></div>
+                <div class="trainer-card"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Дмитрий"><h4>Дмитрий М.</h4><p>Contemporary, Hip-Hop</p><small>Хореограф-постановщик</small></div>
+                <div class="trainer-card"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Елена"><h4>Елена В.</h4><p>Stretching, Pilates</p><small>Сертифицированный инструктор</small></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Цены / абонементы -->
+    <section id="pricing" class="section" style="background: #fef7f2;">
+        <div class="container">
+            <h2 class="section-title">Абонементы и <span>цены</span></h2>
+            <div class="pricing-grid">
+                <div class="price-card"><h3>Разовое</h3><div class="price">750 ₽</div><p>1 любое занятие</p><button class="btn-sign" style="margin-top:20px;" onclick="document.getElementById('openFormBtn').click()">Выбрать</button></div>
+                <div class="price-card popular"><h3>4 занятия</h3><div class="price">2 600 ₽</div><p>650 ₽ / занятие</p><button class="btn-sign" style="margin-top:20px;" onclick="document.getElementById('openFormBtn').click()">Популярное</button></div>
+                <div class="price-card"><h3>8 занятий</h3><div class="price">4 800 ₽</div><p>600 ₽ / занятие</p><button class="btn-sign" style="margin-top:20px;" onclick="document.getElementById('openFormBtn').click()">Выбрать</button></div>
+                <div class="price-card"><h3>Безлимит (месяц)</h3><div class="price">7 500 ₽</div><p>Все направления + заморозка</p><button class="btn-sign" style="margin-top:20px;" onclick="document.getElementById('openFormBtn').click()">Хочу!</button></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Форма записи / контакт -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="form-callback" id="formSection">
+                <div class="form-flex">
+                    <div class="form-text">
+                        <h3>Запишитесь на пробное занятие</h3>
+                        <p>Оставьте заявку — мы перезвоним и подберём удобное время. Первый урок бесплатно!</p>
+                        <p><i class="fas fa-map-pin"></i> г. Москва, ул. Танцевальная, 15<br>
+                        <i class="fas fa-phone-alt"></i> +7 (495) 123-45-67<br>
+                        <i class="fas fa-envelope"></i> hello@movestudio.ru</p>
+                    </div>
+                    <form id="trialForm" class="form-fields">
+                        <input type="text" id="trialName" placeholder="Ваше имя" required>
+                        <input type="tel" id="trialPhone" placeholder="Телефон" required>
+                        <select id="trialDirection">
+                            <option value="">Выберите направление</option>
+                            <option>Zumba</option>
+                            <option>Contemporary</option>
+                            <option>Stretching</option>
+                            <option>Hip-Hop</option>
+                        </select>
+                        <button type="submit">Записаться бесплатно</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div>© 2025 MoveStudio — танцуй и будь в форме</div>
+            <div class="social">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-vk"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="copyright">Все права защищены. Тренируйся с удовольствием.</div>
+    </div>
+</footer>
+
+<script>
+    // Burger menu
+    const burger = document.getElementById('burgerBtn');
+    const navLinks = document.getElementById('navLinks');
+    if (burger) {
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = burger.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    }
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            if (burger) {
+                const icon = burger.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    });
+
+    // Форма записи на пробное
+    const trialForm = document.getElementById('trialForm');
+    if (trialForm) {
+        trialForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('trialName').value.trim();
+            const phone = document.getElementById('trialPhone').value.trim();
+            if (!name || !phone) {
+                alert('Пожалуйста, заполните имя и телефон');
+                return;
+            }
+            alert(`Спасибо, ${name}! Мы свяжемся с вами в ближайшее время для подтверждения пробного занятия.`);
+            trialForm.reset();
+        });
+    }
+
+    // Прокрутка к форме при клике на кнопку "Записаться"
+    const openFormBtn = document.getElementById('openFormBtn');
+    if (openFormBtn) {
+        openFormBtn.addEventListener('click', () => {
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+
+    // Для кнопок в карточках цен (уже есть onclick, но дубль на всякий случай)
+    const priceBtns = document.querySelectorAll('.price-card .btn-sign');
+    priceBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    // little animate on scroll
+    const animateElements = document.querySelectorAll('.direction-card, .trainer-card, .price-card, .feature-card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    animateElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'all 0.5s ease';
+        observer.observe(el);
+    });
+    document.querySelector('.hero-text')?.style.setProperty('opacity', '1');
+</script>
+</body>
+</html>
